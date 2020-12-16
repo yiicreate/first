@@ -5,6 +5,7 @@ import com.test.first.format.Lang;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 @Data
 public class R<E> implements Serializable {
@@ -47,7 +48,9 @@ public class R<E> implements Serializable {
         String dataStr = "";
         if (data instanceof String) {
             dataStr = (String) data;
-        } else {
+        }else if (data instanceof HashMap){
+
+        }else {
             dataStr = String.valueOf(data);
         }
         return String.format("{\"code\":\"%d\",\"info\":\"%s\",\"data\":%s}", code, info, dataStr);

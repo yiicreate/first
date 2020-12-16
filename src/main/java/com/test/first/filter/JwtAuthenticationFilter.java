@@ -33,7 +33,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         String token = request.getHeader(jwtUtil.getHeader());
 
         //判断是否有token
@@ -53,8 +52,8 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
      */
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
         String username = jwtUtil.getUsernameFromToken(token);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if (username != null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             return new UsernamePasswordAuthenticationToken(username, null, userDetails.getAuthorities());
         }
         return null;

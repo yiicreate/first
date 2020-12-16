@@ -70,27 +70,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .formLogin()
+//                .loginProcessingUrl("/login")
+//                .permitAll()
+//                .successHandler(successHandler)
+//                .failureHandler(failuerHandler)
                 .and()
-                .formLogin()
-                .loginProcessingUrl("/login")
-                .permitAll()
-                .successHandler(successHandler)
-                .failureHandler(failuerHandler)
-                .and().authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/guest/**").permitAll()
                 .antMatchers("/login/**").permitAll()
                 .anyRequest()
                 .authenticated()
-                .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutHandler)
+//                .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutHandler)
                 .and()
                 .addFilter(loginFilter())
                 .addFilter(jwtAuthenticationFilter());
+
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
-                .passwordEncoder(passwordEncoder());
+            auth
+//                    .authenticationProvider(authenticationProvider())
+                    .userDetailsService(userDetailsService())
+                    .passwordEncoder(passwordEncoder());
+
 
 //        // 在内存中配置2个用户
 //        auth.inMemoryAuthentication()

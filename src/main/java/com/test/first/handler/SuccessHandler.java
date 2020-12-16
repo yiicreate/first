@@ -17,6 +17,7 @@ import java.util.Map;
 public class SuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse resp, Authentication auth) throws IOException, ServletException {
+        System.out.println("onAuthenticationSuccess");
         Object principal = auth.getPrincipal();
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();

@@ -19,7 +19,7 @@ public class RetResultAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        System.out.println("1");
+        System.out.println("aa");
         if(body instanceof R){
             return  body;
         }
@@ -33,7 +33,6 @@ public class RetResultAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler
     public R handler(Exception ex){
-        System.out.println("2");
         R res = R.err();
         res.setInfo(ex.getMessage());
         res.setCode(500);

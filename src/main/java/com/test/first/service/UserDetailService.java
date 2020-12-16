@@ -20,9 +20,7 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        log.info("The User is {}", s);
         User user = userServiceImp.findByUserName(s);
-
         if(user == null){
             throw  new UsernameNotFoundException("用户没有找到");
         }

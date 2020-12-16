@@ -1,5 +1,9 @@
 package com.test.first.util;
 
+import com.test.first.exception.ComException;
+import com.test.first.format.DefaultLang;
+import com.test.first.format.Lang;
+import com.test.first.format.LangImp;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -78,12 +82,15 @@ public class JwtUitl {
     }
 
     public String getUsernameFromToken(String token) {
+
         if (StringUtils.isBlank(token)) {
-            throw new JwtException("无效 token");
+            LangImp lang = new LangImp(500,"无效 token");
+            throw new ComException(lang);
         }
         Claims claims = getClaimByToken(token);
         if (claims == null || isTokenExpired(claims.getExpiration())) {
-            throw new JwtException(header + "失效，请重新登录");
+            LangImp lang = new LangImp(500,header + "失效，请重新登录");
+            throw new ComException(lang);
         }
         return claims.getSubject();
     }

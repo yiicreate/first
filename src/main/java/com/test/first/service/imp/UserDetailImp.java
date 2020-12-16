@@ -1,12 +1,15 @@
 package com.test.first.service.imp;
 
 import com.test.first.entity.User;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.Role;
 import java.util.Collection;
 
+@NoArgsConstructor
 public class UserDetailImp implements UserDetails {
 
     @Setter
@@ -15,12 +18,8 @@ public class UserDetailImp implements UserDetails {
     private String username;// 用户名
     @Setter
     private String password;// 密码
-//    private List<Role> userRoles;// 用户权限集合
-//    private List<Menu> roleMenus;// 角色菜单集合
-
-    public UserDetailImp(){
-
-    }
+    private String userRoles;// 用户权限集合
+    private String roleMenus;// 角色菜单集合
 
     public UserDetailImp(User user){
         username = user.getUserName();
