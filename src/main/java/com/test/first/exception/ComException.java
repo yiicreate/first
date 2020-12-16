@@ -1,7 +1,5 @@
 package com.test.first.exception;
 
-
-import com.test.first.format.DefaultLang;
 import com.test.first.format.Lang;
 import lombok.Getter;
 

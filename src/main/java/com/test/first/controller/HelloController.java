@@ -1,7 +1,5 @@
 package com.test.first.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.first.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
