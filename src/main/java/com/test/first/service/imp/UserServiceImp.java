@@ -6,6 +6,8 @@ import com.test.first.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImp implements UserService {
 
@@ -21,4 +23,10 @@ public class UserServiceImp implements UserService {
     public User setUser(User user) {
         return userRep.save(user);
     }
+
+    @Override
+    public List<User> findAllLists() {
+        return userRep.findAll();
+    }
+
 }
