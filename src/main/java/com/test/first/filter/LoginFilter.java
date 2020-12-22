@@ -2,7 +2,7 @@ package com.test.first.filter;
 
 import com.test.first.conf.R;
 import com.test.first.exception.ComException;
-import com.test.first.util.ComUitl;
+import com.test.first.util.ComUtil;
 import com.test.first.util.JwtUitl;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +109,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         Map<String,String> map = new HashMap<String, String>();
         map.put(jwtUtil.getHeader(),token);
         R r = R.ok();
-        r.setData(ComUitl.mapToJson(map));
+        r.setData(ComUtil.mapToJson(map));
         response.setContentType("application/json;charset=utf-8");
         response.setStatus(HttpStatus.OK.value());
         response.getWriter().print(r.toString());

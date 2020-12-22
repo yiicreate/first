@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
-public class ComUitl {
+public class ComUtil {
     public static String mapToJson(Map map) throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
         return  om.writeValueAsString(map);

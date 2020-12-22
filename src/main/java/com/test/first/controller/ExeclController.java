@@ -2,7 +2,7 @@ package com.test.first.controller;
 
 import com.test.first.entity.User;
 import com.test.first.service.imp.UserServiceImp;
-import com.test.first.util.ExcelUitl;
+import com.test.first.util.ExcelUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ public class ExeclController  {
             return null;
         }
         InputStream in = file.getInputStream();
-        return  ExcelUitl.importExecl(in,file.getOriginalFilename());
+        return  ExcelUtil.importExecl(in,file.getOriginalFilename());
     }
 
 
@@ -65,7 +65,7 @@ public class ExeclController  {
             j++;
             list.add(str);
         }
-        Workbook wb = ExcelUitl.createWorkBook(header,list,null,null);
+        Workbook wb = ExcelUtil.createWorkBook(header,list,null,null);
         FileOutputStream fos = new FileOutputStream("E:/java_example/first/src/main/resources/static/测试.xls");
         wb.write(fos);
         fos.close();

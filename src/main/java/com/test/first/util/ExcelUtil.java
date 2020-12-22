@@ -17,7 +17,7 @@ import java.util.*;
  * @description:  execl 工具类
  */
 
-public class ExcelUitl {
+public class ExcelUtil {
     private final static String execl_2003 = ".xls";
     private final static String execl_2007 = ".xlsx";
 
