@@ -84,7 +84,16 @@
             <version>4.1.0</version>
         </dependency>
 
-<!--        <dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--        <dependency>-->
 <!--            <groupId>cn.afterturn</groupId>-->
 <!--            <artifactId>easypoi-base</artifactId>-->
 <!--            <version>4.2.0</version>-->

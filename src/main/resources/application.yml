@@ -18,6 +18,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss  #时间戳统一转换为指定格式
     time-zone: Asia/Shanghai
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+
 jwt:
   secret: ssssaaddd
   expire: 3600
