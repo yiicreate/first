@@ -21,8 +21,6 @@ public class ExcelUtil {
     private final static String execl_2003 = ".xls";
     private final static String execl_2007 = ".xlsx";
 
-    private static XSSFCellStyle fontStyle;
-
     public static List<List<Object>> importExecl(InputStream inputStream,String fileName) throws IOException {
         Workbook wb = null;
         String fileType = fileName.substring(fileName.lastIndexOf("."));
