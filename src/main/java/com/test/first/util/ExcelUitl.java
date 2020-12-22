@@ -4,7 +4,11 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -19,9 +23,84 @@ public class ExcelUitl {
 
     private static XSSFCellStyle fontStyle;
 
-    public static void exportExecl(){
-
+    public static List<List<Object>> importExecl(InputStream inputStream,String fileName) throws IOException {
+        Workbook wb = null;
+        String fileType = fileName.substring(fileName.lastIndexOf("."));
+        if(execl_2003.equals(fileType)){
+            wb = new HSSFWorkbook(inputStream);
+        }else if(execl_2007.equals(fileType)){
+            wb = new XSSFWorkbook(inputStream);
+        }
+        return getExcelList(wb);
     }
+
+    public static  List<List<Object>> getExcelList(Workbook wb) throws IOException {
+        List<List<Object>> list = new ArrayList<List<Object>>();
+        Sheet sheet = null;
+        Row row = null;
+        Cell cell = null;
+
+        //遍历Excel中所有的sheet
+        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
+            sheet = wb.getSheetAt(i);
+            if(sheet==null){continue;}
+
+            //遍历当前sheet中的所有行
+            for (int j = sheet.getFirstRowNum(); j < sheet.getLastRowNum(); j++) {
+                row = sheet.getRow(j);
+                if(row==null||row.getFirstCellNum()==j){continue;}
+
+                //遍历所有的列
+                List<Object> li = new ArrayList<Object>();
+                for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
+                    cell = row.getCell(y);
+                    li.add(getCellValue(cell));
+                }
+                list.add(li);
+            }
+        }
+        wb.close();
+        return list;
+    }
+
+
+    /**
+     * 描述：对表格中数值进行格式化
+     * @param cell
+     * @return
+     */
+    public static  Object getCellValue(Cell cell){
+        Object value = null;
+        DecimalFormat df = new DecimalFormat("0");  //格式化number String字符
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");  //日期格式化
+        DecimalFormat df2 = new DecimalFormat("0.00");  //格式化数字
+
+        switch (cell.getCellType()) {
+            case STRING:
+                value = cell.getRichStringCellValue().getString();
+                break;
+            case NUMERIC:
+                if("General".equals(cell.getCellStyle().getDataFormatString())){
+                    value = df.format(cell.getNumericCellValue());
+                }else if("m/d/yy".equals(cell.getCellStyle().getDataFormatString())){
+                    value = sdf.format(cell.getDateCellValue());
+                }else{
+                    value = df2.format(cell.getNumericCellValue());
+                }
+                break;
+            case BOOLEAN:
+                value = cell.getBooleanCellValue();
+                break;
+            case BLANK:
+                value = "";
+                break;
+            default:
+                break;
+        }
+        return value;
+    }
+
+
 
 
     /**

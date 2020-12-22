@@ -1,22 +1,17 @@
 package com.test.first.controller;
 
-import com.test.first.entity.Excel;
 import com.test.first.entity.User;
 import com.test.first.service.imp.UserServiceImp;
 import com.test.first.util.ExcelUitl;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.beans.IntrospectionException;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -33,9 +28,12 @@ public class ExeclController  {
     private UserServiceImp userServiceImp;
 
     @PostMapping("import")
-    public String importFile(@RequestParam("file") MultipartFile file){
-
-        return null;
+    public List<List<Object>> importFile(@RequestParam("file") MultipartFile file) throws IOException {
+        if(file.isEmpty()){
+            return null;
+        }
+        InputStream in = file.getInputStream();
+        return  ExcelUitl.importExecl(in,file.getOriginalFilename());
     }
 
 

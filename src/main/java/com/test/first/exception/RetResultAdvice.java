@@ -19,7 +19,6 @@ public class RetResultAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        System.out.println("aa");
         if(body instanceof R){
             return  body;
         }
